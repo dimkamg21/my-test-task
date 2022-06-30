@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'dart:math'; // unfortunatly use 1 libraries
+
+main() => runApp(
+  Directionality(
+    textDirection: TextDirection.ltr,
+    child: MyApp(),
+  ),
+);
+
+class MyApp extends StatefulWidget {
+  
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  // Default Background Color.
+  Color colorCode = Color.fromARGB(144, 76, 144, 70);
+  final Random random = Random();
+  generateRandomColor(){
+
+    Color tmpColor = Color.fromARGB( // to generate 16777216 colors using RGB
+                  random.nextInt(256),
+                  random.nextInt(256),
+                  random.nextInt(256),
+                  random.nextInt(256),
+              ) ;
+
+    setState(() {
+      colorCode = tmpColor ;
+    });
+
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+       color: colorCode,
+    child : GestureDetector(
+           child: Container(
+            color: Colors.transparent,
+          child: Align(
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                 Text(
+            "Hey there",
+                style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'Times New Roman')
+          ),
+           Icon(Icons.emoji_people, color: Colors.white, size: 60.0),
+              ],
+            ),         
+           ),         
+          ),
+          onTap: () 
+           {
+            generateRandomColor();
+            print('You pressed me');
+          },     
+      ),// this
+    );
+  }
+}
+
+
+
